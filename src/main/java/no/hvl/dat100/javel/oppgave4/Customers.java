@@ -8,19 +8,16 @@ public class Customers {
 
     // a) Complete constructor
     public Customers(int size) {
-
-        // TODO
-
+        customers = new Customer[size];
     }
 
     // b) count number of non-null references
     public int countNonNull() {
-
-
         int count = 0;
-
-        // TODO
-
+        for (Customer a: customers)
+            if (a != null){
+                count += 1;
+            }
         return count;
     }
 
@@ -30,8 +27,12 @@ public class Customers {
         boolean funnet = false;
         Customer c = null;
 
-        // TODO
-
+        for (Customer current: customers)
+            if (customer_id == current.getCustomer_id()){
+                c = current;
+                funnet = true;
+                break;
+            }
         return c;
     }
 
@@ -40,8 +41,13 @@ public class Customers {
 
         boolean inserted = false;
 
-        // TODO
-
+        for (int i = 0; i < customers.length; i++){
+            if (customers[i] == null){
+                customers[i] = c;
+                inserted = true;
+                break;
+            }
+        }
         return inserted;
     }
 
@@ -51,18 +57,30 @@ public class Customers {
         boolean deleted = false;
         Customer c = null;
 
-        // TODO
-
+        for (int i = 0; i < customers.length; i++) {
+            if (customers[i].getCustomer_id() == customer_id) {
+                c = customers[i];
+                customers[i] = null;
+                deleted = true;
+                break;
+            }
+        }
         return c;
     }
 
     // f) return reference table with all customers
     public Customer[] getCustomers() {
 
-        Customer[] customers = null;
+        Customer[] currentCustomers = new Customer[countNonNull()];
 
-        // TODO
+        for (Customer current: customers){
+            int i = 0;
+            if (current != null){
+                currentCustomers[i] = current;
+                i++;
+            }
+        }
 
-        return customers;
+        return currentCustomers;
     }
 }
