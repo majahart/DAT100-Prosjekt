@@ -50,9 +50,9 @@ public class MonthMain {
 
     //f
         System.out.println("Oppgave f:");
-        double støtte = MonthlyPower.computePowerSupport(
+        double stotte = MonthlyPower.computePowerSupport(
                 power_usage_month, power_prices_month);
-        System.out.println("Total strømstøtte: " + støtte + " kr");
+        System.out.println("Total strømstøtte: " + stotte + " kr");
 
     //g
         System.out.println("Oppgave g:");
