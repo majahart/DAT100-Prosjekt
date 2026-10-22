@@ -1,7 +1,9 @@
 package no.hvl.dat100.javel.oppgave5;
 
+import no.hvl.dat100.javel.oppgave1.DailyPower;
 import no.hvl.dat100.javel.oppgave3.Customer;
 import no.hvl.dat100.javel.oppgave2.MonthlyPower;
+import no.hvl.dat100.javel.oppgave3.PowerAgreementType;
 
 import java.util.Arrays;
 
@@ -27,13 +29,34 @@ public class Invoice {
 
     public void computeAmount() {
 
+        this.amount = 0;
 
+        for (int i = 0; i < usage.length; i++) {
 
+            if (c.getAgreement() == PowerAgreementType.NORGESPRICE) {
+                amount += DailyPower.computeNorgesPrice(usage[i]);
+            } else if (c.getAgreement() == PowerAgreementType.SPOTPRICE){
+                amount += DailyPower.computeSpotPrice(usage[i], prices[i]);
+            } else {
+                amount += DailyPower.computeSpotPrice(usage[i], prices[i]) - DailyPower.computePowerSupport(usage[i], prices[i]);
+            }
+        }
     }
-
     public void printInvoice() {
 
-        // TODO
+        System.out.println(c);
+        System.out.println("Month: " + month);
+
+        double totalUsage = 0;
+
+        for (int i = 0; i < usage.length; i++) {
+
+            totalUsage += DailyPower.computePowerUsage(usage[i]);
+        }
+
+        System.out.printf("Usage: %.2f kWh\n", totalUsage);
+        computeAmount();
+        System.out.printf("Amount: %.2f NOK\n", amount);
 
     }
 }
